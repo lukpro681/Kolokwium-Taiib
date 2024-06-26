@@ -1,0 +1,40 @@
+<div>
+    <br>
+    <button (click)="toggleForm()">
+        
+      {{ showForm ? 'Anuluj dodawanie myszki' : 'Dodaj myszkę' }}
+    </button>
+    <br><br>
+  </div>
+  
+  <div *ngIf="showForm">
+    <form (ngSubmit)="addMouse()">
+      <label for="model">Model:</label>
+      <input id="model" [(ngModel)]="model" name="model" required>
+      <label for="dpi">DPI:</label>
+      <input id="dpi" [(ngModel)]="dpi" name="dpi" type="number" required>
+      <button type="submit">Dodaj</button>
+    </form>
+  </div>
+  
+  <div *ngIf="!showForm">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Model</th>
+          <th>DPI</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mouse of mice">
+          <td>{{ mouse.id}}</td>
+          <td>{{ mouse.model }}</td>
+          <td>{{ mouse.dpi }}</td>
+          <td><button (click)="deleteMouse(mouse.id)">Usuń</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
